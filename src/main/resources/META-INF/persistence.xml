@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<!-- Klassen -->
+		<class>com.github.joergdev.mosy.backend.persistence.model.GlobalConfig</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.Interface</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.InterfaceMethod</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.InterfaceType</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.MockData</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.MockSession</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.Record</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.RecordConfig</class>
+
+		<properties>
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.connection.username" value="sa"/>
+			<property name="hibernate.connection.password" value=""/>
+			<property name="hibernate.connection.url" value="jdbc:h2:~/mosy_db;AUTO_SERVER=TRUE"/>
+			<property name="hibernate.id.new_generator_mappings" value="false"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
