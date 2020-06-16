@@ -3,6 +3,9 @@
 	<name>mosy-backend-standalone</name>
 	<comment></comment>
 	<projects>
+		<project>mosy-backend</project>
+		<project>mosy-api</project>
+		<project>mosy-shared</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
