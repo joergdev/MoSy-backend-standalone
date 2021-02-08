@@ -12,9 +12,11 @@
 		<class>com.github.joergdev.mosy.backend.persistence.model.InterfaceMethod</class>
 		<class>com.github.joergdev.mosy.backend.persistence.model.InterfaceType</class>
 		<class>com.github.joergdev.mosy.backend.persistence.model.MockData</class>
-		<class>com.github.joergdev.mosy.backend.persistence.model.MockSession</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.MockDataMockProfile</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.MockProfile</class>
 		<class>com.github.joergdev.mosy.backend.persistence.model.Record</class>
 		<class>com.github.joergdev.mosy.backend.persistence.model.RecordConfig</class>
+		<class>com.github.joergdev.mosy.backend.persistence.model.RecordSession</class>
 
 		<properties>
 
