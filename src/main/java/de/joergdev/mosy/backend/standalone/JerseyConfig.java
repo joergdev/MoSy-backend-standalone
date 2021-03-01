@@ -1,4 +1,4 @@
-package com.github.joergdev.mosy.backend.standalone;
+package de.joergdev.mosy.backend.standalone;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JerseyConfig extends ResourceConfig
 {
-  public static final String API_IMPL_PACKAGE = "com.github.joergdev.mosy.backend.api.impl";
+  public static final String API_IMPL_PACKAGE = "de.joergdev.mosy.backend.api.impl";
 
   public JerseyConfig()
   {

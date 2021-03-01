@@ -1,4 +1,4 @@
-package com.github.joergdev.mosy.backend.standalone.pool;
+package de.joergdev.mosy.backend.standalone.pool;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import com.github.joergdev.mosy.shared.Utils;
+import de.joergdev.mosy.shared.Utils;
 
 /**
  * Generischer Object Pool.

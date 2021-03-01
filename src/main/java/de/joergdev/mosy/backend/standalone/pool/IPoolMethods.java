@@ -1,4 +1,4 @@
-package com.github.joergdev.mosy.backend.standalone.pool;
+package de.joergdev.mosy.backend.standalone.pool;
 
 /**
  * Interface fuer Methoden die der Pool nutzt.

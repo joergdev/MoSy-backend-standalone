@@ -1,11 +1,11 @@
-package com.github.joergdev.mosy.backend.standalone.persistence;
+package de.joergdev.mosy.backend.standalone.persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import com.github.joergdev.mosy.backend.standalone.pool.IPoolMethods;
-import com.github.joergdev.mosy.backend.standalone.pool.ObjectPool;
+import de.joergdev.mosy.backend.standalone.pool.IPoolMethods;
+import de.joergdev.mosy.backend.standalone.pool.ObjectPool;
 
 public class EntityManagerPoolMethodsImpl implements IPoolMethods<EntityManager>
 {
