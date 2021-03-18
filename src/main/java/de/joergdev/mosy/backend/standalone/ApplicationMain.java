@@ -1,16 +1,16 @@
-package com.github.joergdev.mosy.backend.standalone;
+package de.joergdev.mosy.backend.standalone;
 
 import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import com.github.joergdev.mosy.api.response.EmptyResponse;
-import com.github.joergdev.mosy.api.response.ResponseMessageLevel;
-import com.github.joergdev.mosy.backend.api.APIUtils;
-import com.github.joergdev.mosy.backend.bl.system.BootIntern;
-import com.github.joergdev.mosy.backend.persistence.EntityManagerProviderService;
-import com.github.joergdev.mosy.backend.standalone.persistence.EntityManagerProviderImpl;
+import de.joergdev.mosy.api.response.EmptyResponse;
+import de.joergdev.mosy.api.response.ResponseMessageLevel;
+import de.joergdev.mosy.backend.api.APIUtils;
+import de.joergdev.mosy.backend.bl.system.BootIntern;
+import de.joergdev.mosy.backend.persistence.EntityManagerProviderService;
+import de.joergdev.mosy.backend.standalone.persistence.EntityManagerProviderImpl;
 
 @SpringBootApplication
 public class ApplicationMain extends SpringBootServletInitializer

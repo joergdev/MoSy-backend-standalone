@@ -1,10 +1,10 @@
-package com.github.joergdev.mosy.backend.standalone.persistence;
+package de.joergdev.mosy.backend.standalone.persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.apache.log4j.Logger;
-import com.github.joergdev.mosy.backend.persistence.EntityManagerProvider;
-import com.github.joergdev.mosy.backend.standalone.pool.ObjectPool;
+import de.joergdev.mosy.backend.persistence.EntityManagerProvider;
+import de.joergdev.mosy.backend.standalone.pool.ObjectPool;
 
 public class EntityManagerProviderImpl implements EntityManagerProvider
 {

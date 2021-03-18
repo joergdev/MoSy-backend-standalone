@@ -1,4 +1,4 @@
-package com.github.joergdev.mosy.backend.standalone.persistence;
+package de.joergdev.mosy.backend.standalone.persistence;
 
 import javax.persistence.EntityManager;
 

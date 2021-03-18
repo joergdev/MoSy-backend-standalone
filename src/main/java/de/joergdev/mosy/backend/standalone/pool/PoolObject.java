@@ -1,4 +1,4 @@
-package com.github.joergdev.mosy.backend.standalone.pool;
+package de.joergdev.mosy.backend.standalone.pool;
 
 /**
  * Klasse fuer ein Object im Pool.
