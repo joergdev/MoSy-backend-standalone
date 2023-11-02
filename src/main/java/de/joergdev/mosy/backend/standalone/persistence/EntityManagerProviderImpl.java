@@ -61,11 +61,15 @@ public class EntityManagerProviderImpl implements EntityManagerProvider
   @Override
   public void rollbackEntityManager(EntityManager em)
   {
-    EntityTransaction tx = em.getTransaction();
-    if (tx != null)
+    if (em != null)
     {
-      tx.rollback();
+      EntityTransaction tx = em.getTransaction();
+      if (tx != null)
+      {
+        tx.rollback();
+      }
     }
+
   }
 
   @Override

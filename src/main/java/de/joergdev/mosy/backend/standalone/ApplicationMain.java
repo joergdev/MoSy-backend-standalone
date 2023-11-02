@@ -21,6 +21,7 @@ public class ApplicationMain extends SpringBootServletInitializer
   {
     try
     {
+      long timeStart = System.currentTimeMillis();
       LOG.info("Booting Application " + ApplicationMain.class);
 
       new ApplicationMain().configure(new SpringApplicationBuilder(ApplicationMain.class)).run(args);
@@ -30,7 +31,8 @@ public class ApplicationMain extends SpringBootServletInitializer
 
       doSystemBoot();
 
-      LOG.info("Booted application " + ApplicationMain.class);
+      LOG.info("Booted application " + ApplicationMain.class + " in "
+               + (System.currentTimeMillis() - timeStart) + " ms");
     }
     catch (Exception ex)
     {
