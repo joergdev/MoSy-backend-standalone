@@ -14,10 +14,12 @@
 		<class>de.joergdev.mosy.backend.persistence.model.MockData</class>
 		<class>de.joergdev.mosy.backend.persistence.model.MockDataMockProfile</class>
 		<class>de.joergdev.mosy.backend.persistence.model.MockDataPathParam</class>
+		<class>de.joergdev.mosy.backend.persistence.model.MockDataUrlArgument</class>
 		<class>de.joergdev.mosy.backend.persistence.model.MockProfile</class>
 		<class>de.joergdev.mosy.backend.persistence.model.Record</class>
 		<class>de.joergdev.mosy.backend.persistence.model.RecordConfig</class>
 		<class>de.joergdev.mosy.backend.persistence.model.RecordPathParam</class>
+		<class>de.joergdev.mosy.backend.persistence.model.RecordUrlArgument</class>
 		<class>de.joergdev.mosy.backend.persistence.model.RecordSession</class>
 
 		<properties>
