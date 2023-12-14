@@ -29,7 +29,7 @@
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.connection.username" value="sa"/>
 			<property name="hibernate.connection.password" value=""/>
-			<property name="hibernate.connection.url" value="jdbc:h2:~/mosy_db;AUTO_SERVER=TRUE"/>
+			<property name="hibernate.connection.url" value="jdbc:h2:./db/mosy_db;AUTO_SERVER=TRUE"/>
 			<property name="hibernate.id.new_generator_mappings" value="false"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 
