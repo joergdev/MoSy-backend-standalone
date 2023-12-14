@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.joergdev</groupId>
 	<artifactId>mosy-backend-standalone</artifactId>
-	<version>3.0.1</version>
+	<version>3.0.2</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
