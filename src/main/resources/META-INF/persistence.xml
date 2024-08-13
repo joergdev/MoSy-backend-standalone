@@ -7,6 +7,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<!-- Klassen -->
+		<class>de.joergdev.mosy.backend.persistence.model.DbConfig</class>
 		<class>de.joergdev.mosy.backend.persistence.model.GlobalConfig</class>
 		<class>de.joergdev.mosy.backend.persistence.model.Interface</class>
 		<class>de.joergdev.mosy.backend.persistence.model.InterfaceMethod</class>
@@ -21,6 +22,7 @@
 		<class>de.joergdev.mosy.backend.persistence.model.RecordPathParam</class>
 		<class>de.joergdev.mosy.backend.persistence.model.RecordUrlArgument</class>
 		<class>de.joergdev.mosy.backend.persistence.model.RecordSession</class>
+		<class>de.joergdev.mosy.backend.persistence.model.Tenant</class>
 
 		<properties>
 

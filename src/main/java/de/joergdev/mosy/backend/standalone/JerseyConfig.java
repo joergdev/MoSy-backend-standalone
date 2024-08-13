@@ -10,6 +10,7 @@ import de.joergdev.mosy.backend.api.impl.MockServices;
 import de.joergdev.mosy.backend.api.impl.RecordConfig;
 import de.joergdev.mosy.backend.api.impl.RecordSessions;
 import de.joergdev.mosy.backend.api.impl.Records;
+import de.joergdev.mosy.backend.api.impl.Tenants;
 
 @Component
 public class JerseyConfig extends ResourceConfig
@@ -27,6 +28,7 @@ public class JerseyConfig extends ResourceConfig
     register(Records.class);
     register(RecordSessions.class);
     register(de.joergdev.mosy.backend.api.impl.System.class);
+    register(Tenants.class);
 
     // the jersey scan via packages(..) is actually broken in connection with spring boot jar
     // so we have to register the API classes directly (see above)
