@@ -11,13 +11,13 @@ import java.util.concurrent.locks.ReentrantLock;
 import de.joergdev.mosy.shared.Utils;
 
 /**
- * Generischer Object Pool.
+ * Generic Object Pool.
  * 
- * Durch Uebergabe von true im Konstruktor ist der Pool threadsafe.
+ * By passing concurrent=true in the constructor, the pool is thread-safe.
  * 
  * @author Andreas Joerg
  *
- * @param <T> Typ der Objekte im Pool
+ * @param <T> Type of pool objects
  */
 public class ObjectPool<T>
 {
@@ -28,11 +28,11 @@ public class ObjectPool<T>
   private Lock lock;
 
   /**
-   * Konstruktur mit Uebergabe {@link IPoolMethods} Implementierung
+   * Constructor with {@link IPoolMethods} implementation param.
    * 
-   * NICHT threadsafe
+   * NOT threadsafe
    * 
-   * @param impl
+   * @param impl - IPoolMethods
    */
   public ObjectPool(IPoolMethods<T> impl)
   {
@@ -40,13 +40,12 @@ public class ObjectPool<T>
   }
 
   /**
-  * Konstruktur mit Uebergabe {@link IPoolMethods} Implementierung
+  * Constructor with {@link IPoolMethods} implementation param
   * 
-  * NICHT threadsafe
+  * NOT threadsafe
   * 
-  * @param impl
-  * @param initialSize  -> Initiale Groesse des pools, d.h. wie viele Objekte zu Beginn
-  *                        initialisiert werden sollen
+  * @param impl - IPoolMethods
+  * @param initialSize - Initial size of the pools. On startup, this number of objects will be created.
   */
   public ObjectPool(IPoolMethods<T> impl, int initialSize)
   {
@@ -56,10 +55,10 @@ public class ObjectPool<T>
   /**
    * extended constructor.
    * 
-   * Wenn concurrent true ist, ist der Pool threadsafe.
+   * By passing concurrent=true in the constructor, the pool is thread-safe.
    * 
-   * @param concurrent
-   * @param impl
+   * @param concurrent - if true pool can handle concurrency
+   * @param impl - IPoolMethods
    */
   public ObjectPool(boolean concurrent, IPoolMethods<T> impl)
   {
@@ -69,32 +68,28 @@ public class ObjectPool<T>
   /**
    * extended constructor.
    * 
-   * Wenn concurrent true ist, ist der Pool threadsafe.
+   * By passing concurrent=true in the constructor, the pool is thread-safe.
    * 
-   * @param concurrent
-   * @param impl
-   * @param initialSize  -> Initiale Groesse des pools, d.h. wie viele Objekte zu Beginn
-   *                        initialisiert werden sollen
+   * @param concurrent - if true pool can handle concurrency
+   * @param impl - IPoolMethods
+   * @param initialSize - Initial size of the pools. On startup, this number of objects will be created
    */
   public ObjectPool(boolean concurrent, IPoolMethods<T> impl, int initialSize)
   {
-    this(concurrent, impl, concurrent
-        ? new ReentrantLock()
-        : new NullLock(), initialSize);
+    this(concurrent, impl, concurrent ? new ReentrantLock() : new NullLock(), initialSize);
   }
 
   /**
    * extended constructor.
    * 
-   * Wenn concurrent true ist, ist die interne Liste des Pools threadsafe.
-   * Es muss noch ein Lock Object uebergeben werden.
-   * Falls der Pool concurrent verwendet wird, empfielt sich allerdings der Aufruf des Konstruktors
-   * ObjectPool(boolean concurrent, IPoolMethods<T> impl). Hier wird automatisch ein
-   * ReentrantLock als Lock gesetzt.
+   * By passing concurrent=true in the constructor, the pool is thread-safe
+   * A lock object must also be passed.
+   * However, if the pool uses concurrent, it is recommended to use the constructor ObjectPool(boolean concurrent, IPoolMethods&lt;T&gt; impl).
+   * Here, a ReentrantLock is automatically set as the lock.
    * 
-   * @param concurrent
-   * @param impl
-   * @param lock
+   * @param concurrent - if true pool can handle concurrency
+   * @param impl - IPoolMethods
+   * @param lock - Lock to set
    */
   public ObjectPool(boolean concurrent, IPoolMethods<T> impl, Lock lock)
   {
@@ -104,37 +99,33 @@ public class ObjectPool<T>
   /**
    * extended constructor.
    * 
-   * Wenn concurrent true ist, ist die interne Liste des Pools threadsafe.
-   * Es muss noch ein Lock Object uebergeben werden.
-   * Falls der Pool concurrent verwendet wird, empfielt sich allerdings der Aufruf des Konstruktors
-   * ObjectPool(boolean concurrent, IPoolMethods<T> impl). Hier wird automatisch ein
-   * ReentrantLock als Lock gesetzt.
+   * By passing concurrent=true in the constructor, the pool is thread-safe
+   * A lock object must also be passed.
+   * However, if the pool uses concurrent, it is recommended to use the constructor ObjectPool(boolean concurrent, IPoolMethods&lt;T&gt; impl).
+   * Here, a ReentrantLock is automatically set as the lock.
    * 
-   * @param concurrent
-   * @param impl
-   * @param lock
-   * @param initialSize -> Initiale Groesse des pools, d.h. wie viele Objekte zu Beginn
-   *                       initialisiert werden sollen
+   * @param concurrent - if true pool can handle concurrency 
+   * @param impl - IPoolMethods
+   * @param lock - Lock to set
+   * @param initialSize - Initial size of the pools. On startup, this number of objects will be created
    */
   public ObjectPool(boolean concurrent, IPoolMethods<T> impl, Lock lock, int initialSize)
   {
-    //Pruefen der Implementierung und ggf. setzen
+    // check and set impl
     checkPoolMethodsImpl(impl);
     this.poolMethodsImpl = impl;
 
-    //Je nachdem ob pool threadsafe sein soll, entsprechende Liste setzen
-    poolObjects = concurrent
-        ? new CopyOnWriteArrayList<>()
-        : new ArrayList<>();
+    // set list thread-safe or not
+    poolObjects = concurrent ? new CopyOnWriteArrayList<>() : new ArrayList<>();
 
     setLock(lock);
 
-    // Initiales Erstellen Objekte im Pool, Anzahl Objekte (=initialSize) 
+    // inital creation of objects in pool (number if objects=initialSize) 
     initialInit(initialSize);
 
     if (TTL_UNLIMITED != impl.getTTL())
     {
-      //Starten des Threads um Pool zu cleanen
+      // start pool-cleaning thread
       Thread threadClean = new Thread(checkPool);
       threadClean.setDaemon(true);
 
@@ -151,10 +142,10 @@ public class ObjectPool<T>
   }
 
   /**
-   * Setzt das Lock
+   * Set an lock.
    * 
-   * @param lock
-   * @throws NullPointerException -> Wenn lock null
+   * @param lock - Lock to set
+   * @throws NullPointerException - if lock is null (use NullLock)
    * @see NullLock
    */
   public void setLock(Lock lock)
@@ -168,9 +159,9 @@ public class ObjectPool<T>
   }
 
   /**
-   * Prueft die Implementierung der IPoolMethods auf Gueltigkeit.
+   * Validating IPoolMethods implementation.
    * 
-   * @param impl
+   * @param impl - IPoolMethods
    */
   private void checkPoolMethodsImpl(IPoolMethods<T> impl)
   {
@@ -200,21 +191,23 @@ public class ObjectPool<T>
 
   private void initialInit(int initialSize)
   {
-    //Validierungen
+    // Validations
     if (initialSize < 0)
     {
       throw new IllegalArgumentException("initialSize may not be negative");
     }
+
     if (initialSize == 0)
     {
       return;
     }
+
     if (initialSize > poolMethodsImpl.getMaxSize())
     {
       throw new IllegalArgumentException("initialSize may not be bigger than maxPoolSize");
     }
 
-    // Alles OK -> Objekte initialiseren und in Pool stellen
+    // All fine -> initialise object and put into pool
     for (int x = 0; x < initialSize; x++)
     {
       PoolObject<T> obj = new PoolObject<>(poolMethodsImpl.getNewObj(), false);
@@ -223,7 +216,7 @@ public class ObjectPool<T>
   }
 
   /**
-   * interne Methode um ein Object aus dem Pool zu erhalten.
+   * Internal method to obtain an object from the pool.
    * 
    * @return T
    */
@@ -235,16 +228,16 @@ public class ObjectPool<T>
     {
       PoolObject<T> obj = getFreePoolObject();
 
-      //kein freies object gefunden
+      // no free object found
       if (obj == null)
       {
-        //Noch platz im Pool -> neues Object erzeugen und dem Pool hinzufuegen
+        // Still space in the pool -> create a new object and add it to the pool
         if (poolObjects.size() < poolMethodsImpl.getMaxSize())
         {
           obj = new PoolObject<>(poolMethodsImpl.getNewObj(), true);
           poolObjects.add(obj);
         }
-        //kein Platz mehr im Pool -> Rekursion
+        // No space in pool -> recursive call after delay
         else
         {
           Utils.delay(20);
@@ -253,7 +246,7 @@ public class ObjectPool<T>
         }
       }
 
-      // Validierung
+      // Validation
       if (poolMethodsImpl.validateOnGet())
       {
         if (!poolMethodsImpl.validate(obj.getObj()))
@@ -275,10 +268,9 @@ public class ObjectPool<T>
 
   private PoolObject<T> getFreePoolObject()
   {
-    //Durchlauf Pool
     for (PoolObject<T> poolObj : poolObjects)
     {
-      //Freies object gefunden
+      // free object found
       if (poolObj.isLocked() == false)
       {
         poolObj.setLocked(true);
@@ -290,18 +282,17 @@ public class ObjectPool<T>
   }
 
   /**
-   * Gibt das uebergebene object im Pool wieder frei.
+   * Release the object in pool.
    * 
-   * @param obj
+   * @param obj - object in pool
    */
   public void giveBack(T obj)
   {
-    //Durchlaufe Pool
     for (PoolObject<T> poolObj : poolObjects)
     {
       if (poolObj.getObj().equals(obj))
       {
-        // Validierung
+        // Validations
         if (poolMethodsImpl.validateOnGiveBack())
         {
           if (!poolMethodsImpl.validate(obj))
@@ -322,7 +313,7 @@ public class ObjectPool<T>
   }
 
   /**
-   * Gibt die aktuelle Anzahl der Objekte im Pool zurueck.
+   * Returns the current number of objects in the pool.
    * 
    * @return int
    */
@@ -332,7 +323,7 @@ public class ObjectPool<T>
   }
 
   /**
-   * Gibt die Anzahl der Objekte im Pool zurueck, die freigegeben sind.
+   * Returns the number of objects in the pool that are available.
    * 
    * @return int
    */
@@ -352,7 +343,7 @@ public class ObjectPool<T>
   }
 
   /**
-   * Entfernt alle inaktiven (unlocked) Objekte aus dem Pool
+   * Remove all inactive (unlocked) objects from pool.
    */
   public void flushPool()
   {
@@ -366,13 +357,12 @@ public class ObjectPool<T>
       {
         lock.lock();
 
-        // kann nur flushen, wenn nicht gelocked
+        // can only flush if not locked
         if (!poolObj.isLocked())
         {
           poolObj.setLocked(true);
 
-          // bevor cleanup lock freigeben, da cleanup uU laenger dauern kann und der lock
-          // nur fuer das Locken des poolObjects benoetigt wird
+          // before cleanup release lock, because cleanup may take some time and lock is only needed for locking poolObjects
           lock.unlock();
           unlocked = true;
 
@@ -390,30 +380,30 @@ public class ObjectPool<T>
     }
   }
 
-  //Runnable fuer Thread um Pool zu cleanen
+  /** Runnable for pool cleaning thread */
   private Runnable checkPool = new Runnable()
   {
+    @Override
     public void run()
     {
       while (true)
       {
         doCheck();
 
-        //Schlafen vor naechstem Durchlauf
+        // delay
         Utils.delay(poolMethodsImpl.getCheckInterval());
       }
     }
 
     private void doCheck()
     {
-      //Durchlaufe Pool
       Iterator<PoolObject<T>> it = poolObjects.iterator();
       while (it.hasNext())
       {
         PoolObject<T> poolObj = it.next();
         boolean timeouted = System.currentTimeMillis() - poolObj.getTimeGaveBack() > poolMethodsImpl.getTTL();
 
-        // Wenn timeout noch nicht abgelaufen -> Weiter mit naechstem Object im Pool
+        // if not timeouted -> go to next object in pool
         if (!timeouted)
         {
           continue;
@@ -425,13 +415,12 @@ public class ObjectPool<T>
         {
           lock.lock();
 
-          //Wenn freigegeben und zu lange inaktiv -> cleanup und entfernen
+          // if released and inactive for too long -> cleanup and remove
           if (!poolObj.isLocked())
           {
             poolObj.setLocked(true);
 
-            // bevor cleanup lock freigeben, da cleanup uU laenger dauern kann und der lock
-            // nur fuer das Locken des poolObjects benoetigt wird
+            // before cleanup release lock, because cleanup may take some time and lock is only needed for locking poolObjects
             lock.unlock();
             unlocked = true;
 
@@ -453,29 +442,35 @@ public class ObjectPool<T>
 
   private static class NullLock implements Lock
   {
+    @Override
     public void lock()
     {}
 
+    @Override
     public void lockInterruptibly()
       throws InterruptedException
     {}
 
+    @Override
     public Condition newCondition()
     {
       return null;
     }
 
+    @Override
     public boolean tryLock()
     {
       return false;
     }
 
+    @Override
     public boolean tryLock(long time, TimeUnit unit)
       throws InterruptedException
     {
       return false;
     }
 
+    @Override
     public void unlock()
     {}
   }

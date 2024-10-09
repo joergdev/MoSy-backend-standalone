@@ -6,7 +6,7 @@ package de.joergdev.mosy.backend.standalone.pool;
  * 
  * @author Andreas Joerg
  *
- * @param <T>
+ * @param <T> - type of objects in pool
  */
 public interface IPoolMethods<T>
 {
@@ -16,7 +16,7 @@ public interface IPoolMethods<T>
    * Falls noch Resourcen freigegeben werden muessen kann dies hier erledigt werden.
    * Zb Schliessen einer DB Connection.
    * 
-   * @param obj
+   * @param obj - object in pool
    */
   void cleanup(T obj);
 
@@ -50,21 +50,22 @@ public interface IPoolMethods<T>
 
   /**
    * Validiert das uebergene Objekt aus dem Pool.
-   * Falls es nicht mehr gueltig ist (->false) wird es aus dem Pool entfernt.
+   * Falls es nicht mehr gueltig ist (-&gt;false) wird es aus dem Pool entfernt.
    * 
+   * @param obj - object in pool
    * @return boolean
    * @see #validateOnGet()
    */
   boolean validate(T obj);
 
   /** 
-   * @return boolean -> wenn true wird {@link #validate(Object)} 
+   * @return boolean -&gt; wenn true wird {@link #validate(Object)} 
    *                    beim Holen eines Objekts aus dem Pool aufgerufen
    */
   boolean validateOnGet();
 
   /** 
-   * @return boolean -> wenn true wird {@link #validate(Object)} 
+   * @return boolean -&gt; wenn true wird {@link #validate(Object)} 
    *                    bei Rueckgabe eines Objekts in den Pool aufgerufen
    */
   boolean validateOnGiveBack();
