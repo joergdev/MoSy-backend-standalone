@@ -1,7 +1,7 @@
 package de.joergdev.mosy.backend.standalone.persistence;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import org.apache.log4j.Logger;
 import de.joergdev.mosy.backend.persistence.EntityManagerProvider;
 import de.joergdev.mosy.backend.standalone.pool.ObjectPool;
