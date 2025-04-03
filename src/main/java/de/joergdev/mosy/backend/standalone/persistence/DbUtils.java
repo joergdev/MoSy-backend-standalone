@@ -1,6 +1,6 @@
 package de.joergdev.mosy.backend.standalone.persistence;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 public class DbUtils
 {
