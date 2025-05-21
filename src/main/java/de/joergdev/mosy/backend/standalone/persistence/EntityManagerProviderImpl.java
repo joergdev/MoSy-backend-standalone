@@ -2,13 +2,14 @@ package de.joergdev.mosy.backend.standalone.persistence;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import de.joergdev.mosy.backend.persistence.EntityManagerProvider;
 import de.joergdev.mosy.backend.standalone.pool.ObjectPool;
 
 public class EntityManagerProviderImpl implements EntityManagerProvider
 {
-  private static final Logger LOG = Logger.getLogger(EntityManagerProviderImpl.class);
+  private static final Logger LOG = LogManager.getLogger(EntityManagerProviderImpl.class);
 
   private ObjectPool<EntityManager> emPool = null;
 

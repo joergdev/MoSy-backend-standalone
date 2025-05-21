@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+	<Appenders>
+		<!-- Rolling File Appender -->
+		<RollingFile name="Protokoll" fileName="MoSyBackend.log"
+			filePattern="MoSyBackend.log.%i">
+			<PatternLayout pattern="%d %-4r [%t] %-5p %c %x - %m%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="3000KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingFile>
+
+		<!-- Console Appender -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<JsonLayout compact="true" eventEol="true"
+				complete="false" stacktraceAsString="true" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<!-- Logger for de.joergdev.mosy -->
+		<Logger name="de.joergdev.mosy"
+			level="${sys:log4j2.mosy.level:-INFO}" additivity="false">
+			<AppenderRef ref="Protokoll" />
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<!-- Root Logger -->
+		<Root level="${sys:log4j2.root.level:-INFO}">
+			<AppenderRef ref="Protokoll" />
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>

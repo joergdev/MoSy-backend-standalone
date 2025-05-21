@@ -1,7 +1,8 @@
 package de.joergdev.mosy.backend.standalone;
 
 import jakarta.ws.rs.core.Response;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -15,7 +16,7 @@ import de.joergdev.mosy.backend.standalone.persistence.EntityManagerProviderImpl
 @SpringBootApplication
 public class ApplicationMain extends SpringBootServletInitializer
 {
-  private static final Logger LOG = Logger.getLogger(ApplicationMain.class);
+  private static final Logger LOG = LogManager.getLogger(ApplicationMain.class);
 
   public static void main(String[] args)
   {
